@@ -1,0 +1,136 @@
+ create table marcas (
+mrc_id            int auto_increment primary key,
+mrc_nome          varchar(50) not null,
+mrc_nacionalidade varchar(50)
+);
+
+create table produtos (
+prd_id int auto_increment primary key,
+prd_nome             varchar(50) not null,
+prd_qtd_estoque      int not null default 0,
+prd_estoque_mim      int not null default 0,
+prd_data_fabricacao  timestamp default now(),
+prd_perecível        boolean,
+prd_valor            decimal(10,2),
+prd_marca_id         int,
+constraint fk_marcas foreign key(prd_marca_id) references marcas(marc_id)
+);
+
+create table fornecedores (
+frn_id      int auto_increment primary key,
+frn_nome    varchar(50) not null,
+frn_email   varchar(50)
+);
+
+create table produto_fornecedor (
+pf_prod_id int references produtos(prd_id),
+pf_forn_id int references fornecedores(frn_id),
+primary key (pf_prod_id, pf_forn_id)
+); 
+
+
+-- Insere dados de Marca 
+INSERT INTO marcas (mrc_nome, mrc_nacionalidade) VALUES ('Nike', 'Estados Unidos');
+INSERT INTO marcas (mrc_nome, mrc_nacionalidade) VALUES ('Adidas', 'Alemanha');
+INSERT INTO marcas (mrc_nome, mrc_nacionalidade) VALUES ('Toyota', 'Japão');
+INSERT INTO marcas (mrc_nome, mrc_nacionalidade) VALUES ('Samsung', 'Coreia do Sul');
+INSERT INTO marcas (mrc_nome, mrc_nacionalidade) VALUES ('Sony', 'Japão');
+
+-- Insere dados de Produtos
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Tênis Nike Air Max', 100, 150, NOW(), 0, 150.00, 1);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Camiseta Nike Dri-FIT', 150, 20, NOW(), 1, 45.00, 1);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Bolsa Nike Sportswear', 50, 75, NOW(), 1, 40.00, 1);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Boné Nike Heritage 86', 80, 120, NOW(), 1, 25.00, 1);
+
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Tênis Adidas Ultraboost', 200, 15, NOW(), 0, 180.00, 2);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Calça Adidas Tiro 19', 120, 10, NOW(), 0, 60.00, 2);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Mochila Adidas Originals', 60, 80, NOW(), 1, 55.00, 2);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Camiseta Adidas Trefoil', 90, 100, NOW(), 0, 30.00, 2);
+
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('iPhone 13 Pro', 80, 8, NOW(), 1, 999.00, 3);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('MacBook Air', 60, 6, NOW(), 0, 1199.00, 3);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('iPad Pro', 40, 70, NOW(), 0, 799.00, 3);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('AirPods Pro', 70, 7, NOW(), 0, 249.00, 3);
+
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Samsung Galaxy S21', 40, 4, NOW(), 0, 799.00, 4);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Samsung QLED TV', 30, 3, NOW(), 1, 1299.00, 4);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Samsung Galaxy Tab S7', 35, 90, NOW(), 0, 649.00, 4);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Samsung Wireless Charger', 65, 6, NOW(), 1, 39.00, 4);
+
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('PlayStation 5', 25, 50, NOW(), 1, 499.00, 5);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Sony Noise-Canceling Headphones', 20, 2, NOW(), 0, 249.00, 5);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Sony BRAVIA OLED TV', 30, 40, NOW(), 1, 1499.00, 5);
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id) VALUES ('Sony WH-1000XM4 Headphones', 55, 5, NOW(), 0, 349.00, 5);
+
+
+-- Insere dados dos Fornecedores
+INSERT INTO fornecedores (frn_nome, frn_email) VALUES ('Nike', 'nike@example.com');
+INSERT INTO fornecedores (frn_nome, frn_email) VALUES ('Adidas', 'adidas@example.com');
+INSERT INTO fornecedores (frn_nome, frn_email) VALUES ('Toyota', 'toyota@example.com');
+INSERT INTO fornecedores (frn_nome, frn_email) VALUES ('Samsung', 'samsung@example.com');
+INSERT INTO fornecedores (frn_nome, frn_email) VALUES ('Sony', 'sony@example.com'); 
+
+-- Crie uma view que mostra todos os produtos e suas respectivas marcas;
+create view produto_marca_view as 
+select prd_nome  'Nome Produto',
+       c
+from produtos left join marcas on produtos.prd_marca_id = marcas.mrc_id order by prd_nome;
+
+select * from produto_marca;
+
+-- Crie uma view que mostra todos os produtos e seus respectivos fornecedores;
+CREATE VIEW produtos_fornecedores_view AS
+SELECT
+    prd_nome AS 'Nome Produto',
+    frn_nome AS 'Fornecedor'
+FROM produtos left join fornecedores ON produtos.prd_marca_id = fornecedores.frn_id;
+
+select * from produtos_fornecedores_view;
+
+-- Crie uma view que mostra todos os produtos e seus respectivos fornecedores e marcas;
+CREATE VIEW produtos_fornecedores_marcas_view AS
+SELECT
+    prd_nome AS 'Nome Produto',
+    frn_nome AS 'Fornecedor',
+    mrc_nome AS 'Marca'
+FROM produtos left join fornecedores ON produtos.prd_marca_id = fornecedores.frn_id
+ join marcas on produtos.prd_marca_id = marcas.mrc_id;
+
+select * from produtos_fornecedores_marcas_view;
+
+-- Crie uma view que mostra todos os produtos com estoque abaixo do mínimo;
+CREATE VIEW produtos_estoque_min_view AS
+SELECT
+    prd_nome AS 'Nome Produto',
+    prd_qtd_estoque AS 'Estoque',
+    prd_estoque_mim AS 'Estoque Mín.',
+    prd_valor  AS 'Valor'    
+FROM produtos where produtos.prd_qtd_estoque < produtos.prd_estoque_mim;
+
+select * from produtos_estoque_min_view;
+
+-- Adicione o campo data de validade. Insira novos produtos com essa informação;
+ALTER TABLE produtos
+ADD prd_valid DATE;
+
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id,prd_valid) VALUES ('Tênis Nike Jordan', 100, 150, NOW(), 0, 150.00, 1, '2023-11-30');
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id,prd_valid) VALUES ('Tênis Adidas Samba', 200, 15, NOW(), 0, 180.00, 2,'2024-04-15');
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id,prd_valid) VALUES ('iPhone 15 Pro', 80, 8, NOW(), 1, 999.00, 3, '2030-01-12');
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id,prd_valid) VALUES ('Samsung Galaxy S23', 40, 60, NOW(), 0, 799.00, 4, '2040-10-07');
+INSERT INTO produtos (prd_nome, prd_qtd_estoque, prd_estoque_mim, prd_data_fabricacao, prd_perecível, prd_valor, prd_marca_id,prd_valid) VALUES ('Sony Playstation 5', 60, 30, NOW(), 0, 349.00, 5,'2024-09-08');
+
+select * from produtos where prd_valid is not null;
+
+-- Crie uma view que mostra todos os produtos e suas respectivas marcas com validade vencida;
+CREATE VIEW produtos_marca_venc_view AS
+SELECT
+    prd_nome AS 'Nome Produto',
+    mrc_nome AS 'Marca',
+    prd_valid AS 'Data de Validade'
+FROM produtos left join marcas on produtos.prd_marca_id = marcas.mrc_id where produtos.prd_valid < now();
+
+select * from produtos_marca_venc_view;
+
+-- Selecionar os produtos com preço acima da média.
+
+select * from produtos where prd_valor > (select avg(prd_valor) from produtos);
